@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div>
+<Header class="magin"></Header>
+<router-view></router-view>
+<Footer class="footer"></Footer>
+
+</div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Header from './components/Header/Header.vue'
+import Footer from './components/Footer/Footer.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    Footer,
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.magin {
+  margin-bottom: 30px;
 }
+.footer {
+  margin-top: 30px;
+}
+input {
+  outline: none;
+}
+    .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
 </style>
