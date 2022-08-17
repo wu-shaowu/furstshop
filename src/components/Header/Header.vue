@@ -224,7 +224,7 @@ export default {
         }
 
         .typeListRight:hover {
-          color: #f40;
+          color: #f40 !important;
           display: block;
           transform: scale(1.1, 1.1);
           text-decoration: none;
