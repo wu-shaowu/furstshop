@@ -25,12 +25,16 @@ let router = new VueRouter({
 })
 
 router.beforeEach((to,from,next)=>{
-   
+   if(to.path == '/register'){
+    next()
+   }else{
     if(!localStorage.getItem('TOKEN') && to.path!=='/login'){
-        next('/login')
+      next('/login')
     }else{
         next()
     }
+   }
+   
 })
  export default router;
  

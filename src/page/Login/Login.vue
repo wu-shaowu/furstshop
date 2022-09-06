@@ -1,7 +1,6 @@
 <template>
 <div>
   <div class="login-container">
-    <!-- 登录 -->
     <div class="login-wrap">
       <div class="login">
         <div class="loginform">
@@ -12,21 +11,24 @@
           </ul>
 
           <div class="content">
-            <form >
-              <div class="input-text clearFix">
-                <span></span>
-                <input type="text" placeholder="手机号" v-model="phone">
-              </div>
-              <div class="input-text clearFix">
-                <span class="pwd"></span>
-                <input type="password" placeholder="请输入密码" v-model="password">
-              </div>
-              <button class="btn" @click.prevent="login()">登&nbsp;&nbsp;录</button>
-            </form>
+            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+           <el-form-item label="手机号" prop="phone">
+             <el-input v-model="ruleForm.phone" autocomplete="off"></el-input>
+              </el-form-item>
+                <el-form-item label="密码" prop="pass">
+           <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+              </el-form-item>
+             
+              <el-form-item>
+                 <el-button class="btn" type="primary" @click="submitForm('ruleForm')">登录</el-button>
+                 <el-button class="btn" type="primary" @click="register()">立即注册</el-button>
+            
+               </el-form-item>
+               </el-form>
 
             <div class="call clearFix">
      
-              <router-link class="register" to="/register">立即注册</router-link>
+            
             </div>
           </div>
         </div>
@@ -35,23 +37,54 @@
 
   </div>
 </div>
+
+
 </template>
 
 <script>
-import axios from "axios";
-  export default {
-    name: 'MyLogin',
+   export default {
     data() {
+      var checkPhone = (rule, value, callback) => {
+        if (value === '') {
+          return callback(new Error('账号不能为空'));
+        }
+        callback();
+      };
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+    
+          callback();
+        }
+      };
       return {
-        phone:'',
-        password:'',
-      usersInfo:{},
-
-      }
+        ruleForm: {
+          pass: '',
+     
+          phone: ''
+        },
+        rules: {
+          pass: [
+            { validator: validatePass, trigger: 'blur' }
+          ],
+  
+          phone: [
+            { validator: checkPhone, trigger: 'blur' }
+          ]
+        }
+      };
     },
-    methods:{
-     async login(){
-         const data = { phone: this.phone, password: this.password }
+    methods: {
+      
+      submitForm(formName) {
+        this.$refs[formName].validate(async(valid) => {
+          if (valid) {
+            console.log(this.ruleForm.phone+"");
+            console.log(this.ruleForm.pass+"");
+            console.log(  typeof(this.ruleForm.pass));
+            console.log(  typeof(this.ruleForm.phone));
+      const data = { phone: this.ruleForm.phone, password: this.ruleForm.pass }
  
          try {
          const result =  await  this.$store.dispatch('login',data);
@@ -61,16 +94,21 @@ import axios from "axios";
          } catch (error) {
             alert("登录失败，账号或密码错误")
          }
-      
-
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       },
-      computed: {
-        id(){
-          return this.$store.state.users.usersInfo._id;
-        }
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
+      register(){
+        this.$router.push('/register')
       }
     }
   }
+
 </script>
 
 <style lang="less" scoped>
@@ -93,6 +131,7 @@ import axios from "axios";
         background: #fff;
         float: right;
         top: 45px;
+        right: 300px;
         position: relative;
         padding: 20px;
         margin-right: 100px;
@@ -134,9 +173,9 @@ import axios from "axios";
           border: 1px solid #ddd;
           border-top: none;
           padding: 18px;
-
+        
           form {
-            margin: 15px 0 18px 0;
+            margin: 15px 10px 18px -30px;
             font-size: 12px;
             line-height: 18px;
 
@@ -187,18 +226,7 @@ import axios from "axios";
             }
 
             .btn {
-              background-color: #e1251b;
-              padding: 6px;
-              border-radius: 0;
-              font-size: 16px;
-              font-family: 微软雅黑;
-              word-spacing: 4px;
-              border: 1px solid #e1251b;
-              color: #fff;
-              width: 100%;
-              height: 36px;
-              margin-top: 25px;
-              outline: none;
+              margin: 40px 0px 0px 12px ;
             }
           }
 
