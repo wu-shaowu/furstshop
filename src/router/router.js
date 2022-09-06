@@ -1,60 +1,55 @@
 //路由配置信息
 
-import Home from '../page/Home/Home.vue' ;
-import Login from '../page/Login/Login.vue';
-import Register from '../page/Register/Register.vue';
-import Search from '../page/Search/Search.vue';
-import Detail from '../page/Detail/Detail.vue';
-import ShowCars from '@/page/ShowCars/ShowCars';
-import Trade from '../page/Trade/Trade.vue';
-import Recharge from  '../page/Recharge/Recharge.vue';
-import Order from '../page/Order/Order.vue'
-import Pay from '../page/pay/pay.vue'
 export default [
     {
         path: '/home',
-        component:Home,
+        component:()=>import ('../page/Home/Home.vue'),
+        meta:{
+            name:"张三",
+            show:false,
+        }
+        
     },
     {
         path:"/login",
-        component:Login,
+        component:()=>import ('../page/Login/Login.vue'),
 
     },
     {
         path:'/register',
-        component:Register,
+        component:()=>import ('../page/Register/Register.vue'),
     },
     {
         path:'/search/:keyword?',
-        component:Search,
+        component:()=>import ('../page/Search/Search.vue'),
         name:'search'
     },
     {
         path:'/detail/:skuid?',
-        component:Detail,
+        component:()=>import ('../page/Detail/Detail.vue'),
         name:'detail'
     },
     {
         path:'/showcars',
-        component:ShowCars,
+        component:()=>import ('../page/ShowCars/ShowCars.vue'),
     },
     {
         path:'/recharge',
-        component:Recharge,
+        component:()=>import ('../page/Recharge/Recharge.vue'),
     },
     {
         path:'/order',
-        component:Order,
+        component:()=>import ('../page/Order/Order.vue'),
     },
     {
         path:'/trade/:trade_Id?',
-        component:Trade,
+        component:()=>import ('../page/Trade/Trade.vue'),
         name:'trade',
 
     },
     {
         path:'/pay/:trade_Id?',
-                component:Pay,
+        component:()=>import ('../page/pay/pay.vue'),
                 name:'pay'
     },
     

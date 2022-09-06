@@ -15,11 +15,27 @@
           v-model="phone"
         />
       </div>
-      <div class="content">
+             <div class="content">
+        <label>验证码:</label>
+        <input
+          placeholder="请输入你验证码"
+    
+        />
+      </div>
+       <div class="content">
         <label>登录密码:</label>
         <input
           placeholder="请输入你的密码"
           v-model="password"
+          type="password"
+        />
+      </div>
+      <div class="content">
+        <label>确认密码:</label>
+        <input
+          placeholder="请再次输入你的密码"
+          v-model="password2"
+           type="password"
         />
       </div>
       <div class="btn">
@@ -41,11 +57,14 @@ export default {
       phone: "",
       //密码和确认密码
       password: "",
+      password2:""
     };
   },
   methods:{
         register(){
-           axios
+          if(this.phone&&this.password&&this.password2){
+            if(this.password==this.password2){
+                 axios
         .post("http://localhost:8080/users/register", {
           
             phone: this.phone,
@@ -66,6 +85,14 @@ export default {
             console.log("vue端失败", error.message);
           }
         );
+            }
+               else{
+                alert("两次密码请确认相同")
+               }     
+          }else{
+            alert("请填写完所有表单")
+          }
+  
     },
   }
 };

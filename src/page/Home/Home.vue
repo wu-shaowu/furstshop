@@ -2,16 +2,14 @@
   <div>
     <div class="leftbox">
       <div class="over">
-        <ul >
+        <ul>
           <li>特</li>
           <li>惠</li>
           <li>活</li>
           <li>动</li>
         </ul>
-        
-       </div>
-          <p>在活动内特定水果买满<span>￥200</span>减<span>￥10</span></p>
-   
+      </div>
+      <p>在活动内特定水果买满<span>￥200</span>减<span>￥10</span></p>
     </div>
     <div class="top">
       <div class="swiper-container" ref="mySwiper">
@@ -20,9 +18,6 @@
           <div class="swiper-slide"><img src="./images/lunbo3.webp" /></div>
           <div class="swiper-slide"><img src="./images/lunbo4.webp" /></div>
         </div>
-
-
-
       </div>
     </div>
     <div class="center w">
@@ -33,19 +28,19 @@
           <p>全温层配送</p>
           <p>最快30分钟达</p>
         </li>
-            <li>
+        <li>
           <img src="./images/libox2.png" />
           <h3>配送到家</h3>
           <p>门店可配送范围内</p>
           <p>轻松在家收货</p>
         </li>
-            <li>
+        <li>
           <img src="./images/libox3.png" />
           <h3>一站式购齐</h3>
           <p>实体体验店+购物APP</p>
           <p>全球生鲜一站式购齐</p>
         </li>
-            <li>
+        <li>
           <img src="./images/libox4.png" />
           <h3>SOS药品专栏</h3>
           <p>国药在线合作伙伴</p>
@@ -55,27 +50,21 @@
     </div>
     <div class="hot"><h1>精选热门商品</h1></div>
     <div class="clearfix w">
-      <div class="box" v-for="(goods, index) in searchGoodsInfo" :key="index" >
-        <div v-if="goods.isCheap" class="mangjian">
-          满200-10
-        </div>
-               <router-link :to="`/detail/${goods._id}`">
-          <img
-            width="100px"
-            height="100px"
-            :src="goods.images"
+      <div class="box" v-for="(goods, index) in searchGoodsInfo" :key="index">
+        <div v-if="goods.isCheap" class="mangjian">满200-10</div>
+        <router-link :to="`/detail/${goods._id}`">
+          <img width="100px" height="100px" :src="goods.images"
         /></router-link>
         <p>{{ goods.name }}</p>
         <p>{{ goods.weight }}</p>
         <h4>
           <span>￥{{ goods.price }}</span
           ><span class="cheap"
-            >￥{{ Math.floor((goods.price*1 + 3) * 100) / 100 }}</span
+            >￥{{ Math.floor((goods.price * 1 + 3) * 100) / 100 }}</span
           >
         </h4>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -90,11 +79,15 @@ export default {
       password: "",
       usersInfo: {},
       keyword: "",
+      show: true,
     };
   },
   mounted() {
-     this.searchGoods();
-      // this.isLogin();
+    // console.log(this.$route);
+    // console.log("------------------------");
+    // console.log(this.$router);
+    this.searchGoods();
+    // this.isLogin();
     setTimeout(() => {
       var mySwiper = new Swiper(this.$refs.mySwiper, {
         loop: true, // 循环模式选项
@@ -102,7 +95,6 @@ export default {
         pagination: {
           el: ".swiper-pagination",
         },
-
 
         // 如果需要前进后退按钮
         navigation: {
@@ -112,13 +104,10 @@ export default {
       });
     }, 100);
   },
-  methods:{
+  methods: {
     searchGoods(pageNo) {
-  
-      const data = { name: this.keyword||'' ,
-                        pageNo:1,
-                        pageSize:10};
-        this.$store.dispatch("searchGoods", data);
+      const data = { name: this.keyword || "", pageNo: 1, pageSize: 10 };
+      this.$store.dispatch("searchGoods", data);
     },
     // isLogin(){
     //   axios({
@@ -136,7 +125,7 @@ export default {
     goodInfo() {
       return this.$store.state.goods.goodInfo;
     },
-        searchGoodsInfo() {
+    searchGoodsInfo() {
       return this.$store.state.goods.searchGoods;
     },
   },
@@ -144,6 +133,7 @@ export default {
 </script>
 
 <style scoped>
+
 .w {
   margin: auto;
   width: 1200px;
@@ -162,13 +152,12 @@ img {
   height: 308px;
   width: 980px;
   margin-bottom: 50px;
-
 }
 .libox li {
   float: left;
-  width: 230PX;
+  width: 230px;
   height: 308px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   text-align: center;
   margin-left: 15px;
   box-shadow: 4px 4px 10px #e6e6e6;
@@ -179,13 +168,13 @@ img {
   height: 100px;
 }
 .libox h3 {
-      color: #4e4e4e;
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 30px;
+  color: #4e4e4e;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 30px;
 }
 .libox p {
-  color:#a6a6a6 ; 
+  color: #a6a6a6;
 }
 .leftbox .over {
   display: flex;
@@ -201,19 +190,19 @@ img {
   width: 50px;
   background-color: #eaeaea;
   top: 100px;
-  box-shadow: 3px 3px 10px 1px  rgba(0, 0, 0, .3);
+  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
   float: left;
   z-index: 3;
 }
 
 .leftbox P {
-  display:none;
+  display: none;
   padding: 20px 5px 0px 5px;
   position: absolute;
   width: 100px;
   left: 46px;
-  top:  0px;
-  font-size: 16px
+  top: 0px;
+  font-size: 16px;
 }
 .leftbox:hover {
   width: 170px;
@@ -221,14 +210,13 @@ img {
 }
 .leftbox:hover p,
 .leftbox:hover h4 {
-
   display: block;
 }
 .leftbox span {
   font-weight: 700;
   color: #f40;
 }
-.hot h1{
+.hot h1 {
   width: 240px;
   text-align: center;
   font-size: 40px;
@@ -248,7 +236,6 @@ img {
   text-align: center;
   margin-bottom: 5px;
   border: 1px solid #f2f2f2;
-  
 }
 .box:hover {
   border: 1px solid #f40;
