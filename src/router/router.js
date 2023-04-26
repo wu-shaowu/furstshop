@@ -11,6 +11,16 @@ export default [
         
     },
     {
+        path:"/admin",
+        component:()=>import('../page/Admin/Admin.vue'),
+        children:[
+            {path:"/admin/AdminGood",
+             component:()=>import('../page/AdminGood/AdminGood.vue')},
+             {path:"/admin/AdminTrade",
+             component:()=>import('../page/AdminTrade/AdminTrade.vue')}
+        ]
+    },
+    {
         path:"/login",
         component:()=>import ('../page/Login/Login.vue'),
 

@@ -136,9 +136,6 @@ export default {
       this.detailAddress = this.usersInfo.address[0];
       this.name = this.usersInfo.name;
       this.phone = this.usersInfo.phone;
-      console.log("看这里？？？？？？？？？？？？？");
-      console.log(this.IsCheap);
-      console.log("看这里？？？？？？？？？？？？？");
     },
     //保存用户输入的收货信息
     async keepTradeInfo() {

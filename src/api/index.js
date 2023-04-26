@@ -16,3 +16,7 @@ export const recharge = (data) =>axios({url:'http://localhost:3000/users/recharg
 export const getAllTrade = (data) =>axios({url:'http://localhost:3000/trade/getAllTrade',method:'post',data});
 export const searchGoods = (data) =>axios({url:'http://localhost:3000/goods/search',method:'post',data});
 export const changeAddress = (data) =>axios({url:'http://localhost:3000/users/changeAddress',method:'post',data});
+export const addGoods =(data)=>axios({url:'http://localhost:3000/goods/addGoods',method:'post',data})
+export const saveImage =(data)=>axios({url:'http://localhost:3000/goods/saveImage',method:'post',data})
+export const deleteGoods =(data)=>axios({url:'http://localhost:3000/goods/deleteGoods',method:'post',data})
+export const getAdminTrade = (data) =>axios({url:'http://localhost:3000/trade/getAdminTrade',method:'post',data});

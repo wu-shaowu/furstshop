@@ -11,10 +11,15 @@ const actions = {
         commit
     }, data) {
         const result = await login(data)
-        console.log(result);
+        console.log(result)
         if (result.data.status == 1) {
             localStorage.setItem('TOKEN',result.data.data._id);
             localStorage.setItem('token',result.data.token);
+            if(result.data.data.admin){
+                return false
+            }else{
+                return true
+            }
             commit('LOGIN', result.data);
 
         }else{

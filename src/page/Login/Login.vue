@@ -80,20 +80,21 @@
       submitForm(formName) {
         this.$refs[formName].validate(async(valid) => {
           if (valid) {
-            console.log(this.ruleForm.phone+"");
-            console.log(this.ruleForm.pass+"");
-            console.log(  typeof(this.ruleForm.pass));
-            console.log(  typeof(this.ruleForm.phone));
       const data = { phone: this.ruleForm.phone, password: this.ruleForm.pass }
- 
-         try {
-         const result =  await  this.$store.dispatch('login',data);
+      const result =  await  this.$store.dispatch('login',data);
+      if(result){
+        this.$router.push('/home')
+      }else{
+        this.$router.push('/admin')
+      }
+        //  try {
+        //  const result =  await  this.$store.dispatch('login',data);
    
-              
-            this.$router.push('/home');
-         } catch (error) {
-            alert("登录失败，账号或密码错误")
-         }
+        //     console.log(result)
+        //     this.$router.push('/home');
+        //  } catch (error) {
+        //     alert("登录失败，账号或密码错误")
+        //  }
           } else {
             console.log('error submit!!');
             return false;

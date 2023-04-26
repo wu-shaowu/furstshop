@@ -53,6 +53,7 @@
       <div class="box" v-for="(goods, index) in searchGoodsInfo" :key="index">
         <div v-if="goods.isCheap" class="mangjian">满200-10</div>
         <router-link :to="`/detail/${goods._id}`">
+          <!-- <img width="100px" height="100px" :src="'../../../public/images/'+ goods.images" -->
           <img width="100px" height="100px" :src="goods.images"
         /></router-link>
         <p>{{ goods.name }}</p>
