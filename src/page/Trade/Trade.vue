@@ -70,14 +70,14 @@
             ><i>{{ totalNum }}</i
             >件商品，总商品金额</b
           >
-          <span>{{ totalAmount }}</span>
+          <span>{{Math.floor(totalAmount*100)/100  }}</span>
         </li>
       </ul>
     </div>
     <div class="trade">
       <div class="price">
         <p v-if="IsCheap == 10">满减￥10</p>
-        应付金额:　<span>¥{{ totalAmount - IsCheap }}</span>
+        应付金额:　<span>¥{{ Math.floor((totalAmount - IsCheap)*100)/100  }}</span>
       </div>
       <div class="receiveInfo">
         寄送至:

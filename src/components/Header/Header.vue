@@ -7,8 +7,8 @@
           <div class="loginList">
             <p class="transform">
               <svg class="icon" style="font-size: 16px" aria-hidden="true">
-                <use xlink:href="#icon-huanyingye"></use></svg
-              >{{ usersInfo.phone }}
+                <use xlink:href="#icon-huanyingye"></use></svg>
+              {{ usersInfo.phone }}
             </p>
             <p v-if="!usersInfo.phone">
               <router-link to="/login" class="transform">请登录</router-link>
@@ -29,22 +29,19 @@
 
             <router-link to="/home" class="transform">主页</router-link>
           </div>
-          <div class="typeList">
+          <div class="typeList" v-show="!admin">
             <a href="###" class="list typeListRight">
               <svg class="icon" style="font-size: 16px" aria-hidden="true">
-                <use xlink:href="#icon-youhuijuan"></use></svg
-              >我的优惠卷
+                <use xlink:href="#icon-youhuijuan"></use></svg>我的优惠卷
               <span>优惠卷:{{ usersInfo.coupon || 0 }}</span>
             </a>
             <router-link to="/recharge" class="typeListRight"
               ><svg class="icon" style="font-size: 16px" aria-hidden="true">
-                <use xlink:href="#icon-chongzhi01"></use></svg
-              >充值</router-link
+                <use xlink:href="#icon-chongzhi01"></use></svg>充值</router-link
             >
             <router-link to="/showcars" class="typeListRight"
               ><svg class="icon" style="font-size: 16px" aria-hidden="true">
-                <use xlink:href="#icon-gouwucheman"></use></svg
-              >我的购物车</router-link
+                <use xlink:href="#icon-gouwucheman"></use></svg>我的购物车</router-link
             >
             <router-link to="/order" class="typeListRight">
               <i class="el-icon-user-solid"></i> 我的订单</router-link
@@ -96,6 +93,8 @@ export default {
     return {
       keyword: "",
       goods: [],
+      isLogin:localStorage.getItem('token'),
+      
     };
   },
   mounted() {
@@ -113,10 +112,10 @@ export default {
       this.keyword = "";
     },
     async checkId() {
-      const data = { _id: localStorage.getItem("TOKEN") || "" };
-      if (data._id) {
+ 
+      if (localStorage.getItem("token")) {
+        const data = { _id: localStorage.getItem("token")  };
         await this.$store.dispatch("checkId", data);
-        // this.usersInfo = this.$store.state.users.usersInfo;
       } else {
         this.usersInfo = {};
       }
@@ -124,7 +123,9 @@ export default {
 
     logout() {
       this.$store.commit("LOGOUT");
-      localStorage.setItem("TOKEN", "");
+      localStorage.removeItem("token");
+      localStorage.removeItem("TOKEN");
+      localStorage.removeItem("admin");
       this.$router.push("/login");
       this.getUsers();
     },
@@ -156,8 +157,22 @@ export default {
   },
   computed: {
     usersInfo() {
+      if(this.$store.state.users.usersInfo)
       return this.$store.state.users.usersInfo;
+      else{
+        return {}
+      }
+     
     },
+    admin(){
+      if(this.$store.state.users.usersInfo){
+        return this.$store.state.users.usersInfo.admin
+      }else{
+        return localStorage.getItem('admin')||''
+      }
+      
+    }
+
   },
 };
 </script>

@@ -57,7 +57,35 @@ export default {
         money: ((this.money*1)+(this.hasMoney*1)) ,
         coupon,
       };
-      this.$store.dispatch("recharge", data);
+              //element弹框
+              this.$alert(
+          "<img src=http://localhost:3000/images/wx2.jpg ></img>",
+          "请你微信支付",
+          {
+            dangerouslyUseHTMLString: true,
+            //是否显示取消
+            showCancelButton: true,
+            //居中
+            center: true,
+            //	取消按钮的文本内容
+            cancelButtonText: "支付遇见的问题",
+            //确定按钮的文本内容
+            confirmButtonText: "已支付成功",
+            //是否显示右上角关闭按钮
+            showClose: false,
+            beforeClose: async (type, instance, done) => {
+              //type取消还是确定.instance当前组件实例，done关闭弹窗方法
+              if (type == "cancel") {
+                done();
+              } else {
+                //关闭弹窗
+                done();
+                this.$store.dispatch("recharge", data);
+              }
+            },
+          }
+        );
+     
     },
   },
 };
@@ -104,5 +132,6 @@ h1 {
   font-weight: 700;
   font-size: 15px;
   border: none;
+  cursor: pointer;
 }
 </style>

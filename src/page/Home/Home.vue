@@ -72,6 +72,10 @@
 <script>
 import Swiper from "swiper";
 import axios, { Axios } from "axios";
+import {
+  getGoodInfo,
+} from '@/api/index'
+import { Message } from "element-ui";
 export default {
   name: "MyHome",
   data() {
@@ -84,9 +88,7 @@ export default {
     };
   },
   mounted() {
-    // console.log(this.$route);
-    // console.log("------------------------");
-    // console.log(this.$router);
+   this.test()
     this.searchGoods();
     // this.isLogin();
     setTimeout(() => {
@@ -106,6 +108,30 @@ export default {
     }, 100);
   },
   methods: {
+    test(){
+       const pro = new Promise((resolve,reject)=>{
+        getGoodInfo().then((response)=>{  
+          console.log(response);
+          let a = response.data.data
+          if(response.status === 201){
+            resolve('ok')
+          }else{
+            reject('erro')
+          }
+         }).catch((error)=>{
+          alert("请求失败")
+          console.log(error);
+         })
+      })
+      return pro
+      // this.$store.dispatch("test").then((response)=>{
+      //   console.log(response);      
+      // }).catch((erro)=>{
+      //   console.log(erro);
+      // })
+    
+
+    },
     searchGoods(pageNo) {
       const data = { name: this.keyword || "", pageNo: 1, pageSize: 10 };
       this.$store.dispatch("searchGoods", data);

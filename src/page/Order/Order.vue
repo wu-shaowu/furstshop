@@ -46,7 +46,6 @@
         </div>
     
     </div>
-  
 </div>
 </template>
 
@@ -100,8 +99,12 @@ export default {
                     address:this.add};
                     console.log(data);
              const result = await changeAddress(data);
-               this.address.push(this.newaddress);
-             console.log(result);
+            
+              this.address.push(this.newaddress);
+              if(result.data.data){
+                this.$router.go(0)
+              }
+
           }else{
             alert("请输入有效的地址")
           }

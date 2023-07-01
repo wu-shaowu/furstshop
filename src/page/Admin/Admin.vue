@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
         <el-tab-pane label="商品操作" name="AdminGood">商品操作</el-tab-pane>
         <el-tab-pane label="查看订单" name="AdminTrade">查看订单</el-tab-pane>
       </el-tabs>
@@ -30,5 +30,6 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
+
 </style>

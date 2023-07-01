@@ -3,6 +3,8 @@ import {
     checkId,
     recharge
 } from '../api/index'
+import router from '@/router'
+
 const state = {
     usersInfo: {}
 };
@@ -13,13 +15,14 @@ const actions = {
         const result = await login(data)
         console.log(result)
         if (result.data.status == 1) {
+            localStorage.setItem('token',result.data.data._id);
             localStorage.setItem('TOKEN',result.data.data._id);
-            localStorage.setItem('token',result.data.token);
-            if(result.data.data.admin){
-                return false
-            }else{
-                return true
-            }
+            localStorage.setItem('admin',result.data.data.admin||'false');
+            if( result.data.data.admin){
+               router.push('/admin/AdminGood')
+              }else{
+                router.push('/home') 
+              }
             commit('LOGIN', result.data);
 
         }else{
@@ -30,6 +33,7 @@ const actions = {
         commit
     }, data) {
         const result = await checkId(data)
+        console.log(result)
         if (result.data.status == 1) {
             commit('CHECKID', result.data);
 

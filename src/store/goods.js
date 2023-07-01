@@ -1,7 +1,8 @@
 import {
   getGoodInfo,
   getGoodDetail,
-  searchGoods
+  searchGoods,
+  editGoods
 } from '../api/index'
 import axios from 'axios'
 const state = {
@@ -12,6 +13,23 @@ const state = {
   total: 0,
 };
 const actions = {
+  async editGoods({commit},data){
+    const result =await editGoods(data)
+    console.log(result);
+  },
+  test(){
+    const pro = new Promise((resolve,reject)=>{
+     getGoodInfo().then((response)=>{  
+       console.log(response);
+       if(response.data.status === 1){
+         resolve('ok')
+       }else{
+         reject("erro")
+       }
+      })
+   })
+   return pro
+  },
   async getGoodInfo({commit}) {
     const result = await getGoodInfo();
     console.log(result.data);

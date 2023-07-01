@@ -31,6 +31,12 @@ router.beforeEach((to,from,next)=>{
     if(!localStorage.getItem('TOKEN') && to.path!=='/login'){
       next('/login')
     }else{
+        if(localStorage.getItem('admin')=='true' && to.path=='/home'){
+            next('/admin/AdminGood')
+        }
+        if(localStorage.getItem('admin')=='false' && to.path=='/admin'){
+            next('/home')
+        }
         next()
     }
    }
